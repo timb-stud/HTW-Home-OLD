@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class KleinerServer {
     static final    int         PORT            = 1234;
-    static final    String      MULTICAST_GROUP = "255.255.255.255";
+    static final    String      MULTICAST_GROUP = "224.0.0.1";
     static final    InetAddress GROUP_ADDRESS;
     static {
         try {
@@ -20,14 +20,17 @@ public class KleinerServer {
     //ServerSocket server = new ServerSocket(1234);
 
     public KleinerServer() throws IOException{
+        
         while (true) {
+            System.out.println("SPAOST");
             MulticastSocket multicastSocket;
             multicastSocket = new MulticastSocket(PORT);
             multicastSocket.joinGroup(GROUP_ADDRESS);
             byte[] buf = new byte[1000];
             DatagramPacket recv = new DatagramPacket(buf, buf.length);
             multicastSocket.receive(recv);
-            System.out.println(recv);
+            System.out.write(recv.getData());
+            System.out.println("von getData");
         }
     }
     public static void main (String[] args) {
