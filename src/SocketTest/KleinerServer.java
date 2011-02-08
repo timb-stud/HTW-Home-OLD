@@ -6,20 +6,28 @@ import java.io.*;
  * @author tobiaslana
  */
 public class KleinerServer {
+    static final    int         PORT            = 1234;
+    static final    String      MULTICAST_GROUP = "255.255.255.255";
+    static final    InetAddress GROUP_ADDRESS;
+    static {
+        try {
+            GROUP_ADDRESS = InetAddress.getByName(MULTICAST_GROUP);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    ServerSocket server = new ServerSocket(1234);
+    //ServerSocket server = new ServerSocket(1234);
 
     public KleinerServer() throws IOException{
         while (true) {
-            Socket client = server.accept();
-            InputStream input = client.getInputStream();
-            OutputStream output = client.getOutputStream();
-            int zahl1 = input.read();
-            int zahl2 = input.read();
-            output.write(zahl1 + zahl2);
-            output.flush();
-            input.close();
-            output.close();
+            MulticastSocket multicastSocket;
+            multicastSocket = new MulticastSocket(PORT);
+            multicastSocket.joinGroup(GROUP_ADDRESS);
+            byte[] buf = new byte[1000];
+            DatagramPacket recv = new DatagramPacket(buf, buf.length);
+            multicastSocket.receive(recv);
+            System.out.println(recv);
         }
     }
     public static void main (String[] args) {
