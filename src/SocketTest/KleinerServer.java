@@ -24,7 +24,7 @@ public class KleinerServer {
     }
     public static void main (String[] args) {
         try {
-            KleinerServer server = KleinerServer();
+            KleinerServer server = new KleinerServer();
         } catch (IOException e) {
             System.out.print(e);
         }
