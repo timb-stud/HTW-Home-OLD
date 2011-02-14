@@ -5,13 +5,20 @@
 
 package Message;
 
+import java.io.IOException;
+
 /**
  *
  * @author tobiaslana
  */
 public class MessageTester {
 
-    Message msg = new Message("ichsende", "dorthin", "diesenText");
-    MessageSender msgs = new MessageSender();
-    msgs.sendMsg(msg);
+    
+
+    public MessageTester() throws IOException {
+        Message msg = new Message("ichsende", "dorthin", "diesenText");
+        MessageSender msgsender = new MessageSender();
+        msgsender.sendMsg(msg);
+    }
+    
 }
