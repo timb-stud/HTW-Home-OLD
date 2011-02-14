@@ -19,9 +19,13 @@ public class MessageTester {
         // Server
         MessageReceiver msgr = new MessageReceiver();
         // Client
-        Message msg = new Message("ichsende", "dorthin", "diesenText");
-        MessageSender msgsender = new MessageSender();
-        msgsender.sendMsg(msg);
+//        Message msg = new Message("ichsende", "dorthin", "diesenText");
+//        MessageSender msgsender = new MessageSender();
+//        msgsender.sendMsg(msg);
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
+        MessageTester test = new MessageTester();
     }
     
 }
